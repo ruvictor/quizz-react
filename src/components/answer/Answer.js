@@ -2,7 +2,6 @@ import React from 'react';
 import './Answer.css';
 
 const Answer = (props) => {
-    console.log(props.correctAnswer);
     let answers = Object.keys(props.answer)
         .map((qAnswer, i) => (
             <li

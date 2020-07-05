@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import './Quiz.css';
 import Question from './question/Question';
 import Answer from './answer/Answer';
+import './Quiz.css';
 
 export default class Quiz extends Component {
 
@@ -43,7 +43,6 @@ export default class Quiz extends Component {
     // the method that checks the correct answer
     checkAnswer = answer => {
         const { correctAnswers, step, score } = this.state;
-        console.log(answer);
         if(answer === correctAnswers[step]){
             this.setState({
                 score: score + 1,
@@ -56,23 +55,48 @@ export default class Quiz extends Component {
                 clickedAnswer: answer
             });
         }
-        console.log(correctAnswers[step]);
+    }
+
+    // method to move to the next question
+    nextStep = (step) => {
+        this.setState({
+            step: step + 1,
+            correctAnswer: 0,
+            clickedAnswer: 0
+        });
     }
 
     render(){
-        let { quiestions, answers, correctAnswer, clickedAnswer, step } = this.state;
+        let { quiestions, answers, correctAnswer, clickedAnswer, step, score } = this.state;
         return(
             <div className="Content">
-                <Question
-                    question={quiestions[step]}
-                />
-                <Answer
-                    answer={answers[step]}
-                    step={step}
-                    checkAnswer={this.checkAnswer}
-                    correctAnswer={correctAnswer}
-                    clickedAnswer={clickedAnswer}
-                />
+                {step <= Object.keys(quiestions).length ? 
+                    (<>
+                        <Question
+                            question={quiestions[step]}
+                        />
+                        <Answer
+                            answer={answers[step]}
+                            step={step}
+                            checkAnswer={this.checkAnswer}
+                            correctAnswer={correctAnswer}
+                            clickedAnswer={clickedAnswer}
+                        />
+                        <button
+                        className="NextStep"
+                        disabled={
+                            clickedAnswer && Object.keys(quiestions).length >= step
+                            ? false : true
+                        }
+                        onClick={() => this.nextStep(step)}>Next</button>
+                    </>) : (
+                        <div className="finalPage">
+                            <h1>You have completed the quiz!</h1>
+                            <p>Your score is: {score} of {Object.keys(quiestions).length}</p>
+                            <p>Thank you!</p>
+                        </div>
+                    )
+                }
             </div>
         );
     }
