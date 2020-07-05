@@ -1,3 +1,13 @@
 .App {
-  text-align: center;
+  width: 100%;
+  background-color: #F0F0F0;
+  padding: 50px 10px;
+}
+.Content {
+  display: table;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
 }
