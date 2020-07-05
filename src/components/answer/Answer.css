@@ -13,3 +13,19 @@
     cursor: pointer;
     background-color: #a2a2a2;
 }
+.Answers .correct,
+.Answers .correct:hover {
+    background-color: #1db900;
+    border-left: 4px solid #0f6300;
+    color: #fff;
+}
+.Answers .incorrect,
+.Answers .incorrect:hover {
+    background-color: #ec0000;
+    border-left: 4px solid #FF3B3B;
+    color: #fff;
+}
+.Answers[disabled] {
+    pointer-events: none;
+    opacity: 0.7;
+}

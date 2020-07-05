@@ -1,10 +1,4 @@
-.Content h1{
-    margin: 15px 0;
-    font-size: 25px;
-    font-family: Arial,sans-serif;
-    font-weight: normal;
-    color: #da0f0b;
-    text-transform: none;
-    text-shadow: none;
-    text-align: left;
-}
+/* .Content[disabled] {
+    pointer-events: none;
+    opacity: 0.7;
+} */

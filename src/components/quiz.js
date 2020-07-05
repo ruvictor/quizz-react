@@ -14,8 +14,8 @@ export default class Quiz extends Component {
         },
         answers: {
             1: {
-                1: 'New Orleans',
-                2: 'Chicago',
+                1: 'Chicago',
+                2: 'New Orleans',
                 3: 'New York'
             },
             2: {
@@ -30,25 +30,37 @@ export default class Quiz extends Component {
             }
         },
         correctAnswers: {
-            1: 1,
-            2: 1,
-            3: 1
+            1: '2',
+            2: '1',
+            3: '1'
         },
-        step: 1
+        correctAnswer: 0,
+        clickedAnswer: 0,
+        step: 1,
+        score: 0
     }
 
     // the method that checks the correct answer
     checkAnswer = answer => {
-        const { correctAnswers, step } = this.state;
+        const { correctAnswers, step, score } = this.state;
         console.log(answer);
         if(answer === correctAnswers[step]){
-            alert('Yes');
+            this.setState({
+                score: score + 1,
+                correctAnswer: correctAnswers[step],
+                clickedAnswer: answer
+            });
+        }else{
+            this.setState({
+                correctAnswer: 0,
+                clickedAnswer: answer
+            });
         }
         console.log(correctAnswers[step]);
     }
 
     render(){
-        let { quiestions, answers, step } = this.state;
+        let { quiestions, answers, correctAnswer, clickedAnswer, step } = this.state;
         return(
             <div className="Content">
                 <Question
@@ -58,6 +70,8 @@ export default class Quiz extends Component {
                     answer={answers[step]}
                     step={step}
                     checkAnswer={this.checkAnswer}
+                    correctAnswer={correctAnswer}
+                    clickedAnswer={clickedAnswer}
                 />
             </div>
         );
